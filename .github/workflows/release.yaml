@@ -26,11 +26,11 @@ jobs:
 
       - name: Read .nuspec file
         id: read-nuspec
-        run: echo "::set-output name=nuspec::$(cat ${{env.PACKAGE_NAME}}.nuspec)"
+        run: echo "nuspec=$(cat prod/${{env.PACKAGE_NAME}}.nuspec)" >> $GITHUB_OUTPUT
 
       - name: Extract version from .nuspec
         id: extract-version
-        run: echo "::set-output name=version::$(xmllint --xpath 'string(/package/metadata/version)' <<< ${{ steps.read-nuspec.outputs.nuspec }})"
+        run: echo "version=$(xmllint --xpath 'string(/package/metadata/version)' <<< ${{ steps.read-nuspec.outputs.nuspec }})" >> $GITHUB_OUTPUT
 
 
       - name: Use the output
