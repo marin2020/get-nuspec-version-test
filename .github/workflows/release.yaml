@@ -30,7 +30,10 @@ jobs:
       - name: Read .nuspec file
         id: read-nuspec
         run: |
-            nuspec=$(cat prod/${{env.PACKAGE_NAME}}.nuspec)
+            nuspec=$(cat <<EOF
+            prod/${{env.PACKAGE_NAME}}.nuspec)
+            EOF
+            )
             echo nuspec=$nuspec >> $GITHUB_OUTPUT
 
       - name: Extract version from .nuspec
