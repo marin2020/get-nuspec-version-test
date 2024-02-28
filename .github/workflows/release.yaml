@@ -30,7 +30,7 @@ jobs:
 
       - name: Extract version from .nuspec
         id: extract-version
-        run: echo "::set-output name=version::$(xmllint --xpath 'string(/package/metadata/description)' <<< ${{ steps.read-nuspec.outputs.nuspec }})"
+        run: echo "::set-output name=version::$(xmllint --xpath 'string(/package/metadata/version)' <<< ${{ steps.read-nuspec.outputs.nuspec }})"
 
 
       - name: Use the output
