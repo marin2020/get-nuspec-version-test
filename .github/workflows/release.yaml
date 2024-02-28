@@ -23,6 +23,9 @@ jobs:
       PACKAGE_NAME: 'Milestone.TA.UPnP'
 
     steps:
+    
+      - name: Check out code
+        uses: actions/checkout@v4
 
       - name: Read .nuspec file
         id: read-nuspec
