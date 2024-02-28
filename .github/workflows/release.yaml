@@ -46,6 +46,7 @@ jobs:
       - name: Extract version from .nuspec
         id: extract-version
         run: |
+          cat prod/${{env.PACKAGE_NAME}}.nuspec
           echo "11111=$(xmllint --xpath '/package/metadata/version/text()' prod/${{env.PACKAGE_NAME}}.nuspec)"
           echo "22222=$(xmllint --xpath '/package/metadata/version' prod/${{env.PACKAGE_NAME}}.nuspec)"
           echo "version=$(xmllint --xpath '/package/metadata/version/text()' prod/${{env.PACKAGE_NAME}}.nuspec)" >> "$GITHUB_OUTPUT"
