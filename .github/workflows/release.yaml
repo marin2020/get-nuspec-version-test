@@ -15,13 +15,13 @@ jobs:
     # Use container-based Windows runners
     #runs-on: gha-runner-scale-set-windows
 
-    # Needed to create tag
+    # Needed to create a tag
     permissions:
       contents: write
 
     env:
       PACKAGE_NAME: 'Milestone.TA.UPnP'
-		
+
     steps:
 
       - name: Read .nuspec file
