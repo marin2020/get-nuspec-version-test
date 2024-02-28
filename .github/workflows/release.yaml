@@ -27,21 +27,25 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Read .nuspec file
-        id: read-nuspec
+      - name: Install xmllint
         run: |
             sudo apt-get update
             sudo apt-get install libxml2-utils
-            echo "nuspec=<<EOF_MARKER" 
-            cat prod/${{env.PACKAGE_NAME}}.nuspec
-            echo EOF_MARKER
-            echo '$nuspec'
-            echo "$nuspec"
-            echo "nuspec='$nuspec'" >> $GITHUB_OUTPUT
+      
+      #- name: Read .nuspec file
+      #  id: read-nuspec
+      #  run: |
+
+      #      echo "nuspec=<<EOF_MARKER" 
+      #      cat prod/${{env.PACKAGE_NAME}}.nuspec
+      #      echo EOF_MARKER
+      #      echo '$nuspec'
+      #      echo "$nuspec"
+      #      echo "nuspec='$nuspec'" >> $GITHUB_OUTPUT
 
       - name: Extract version from .nuspec
         id: extract-version
-        run: echo "version=$(xmllint --xpath 'string(/package/metadata/version)' <<< ${{ steps.read-nuspec.outputs.nuspec }})" >> "$GITHUB_OUTPUT"
+        run: echo "version=$(xmllint --xpath 'string(/package/metadata/version)' prod/${{env.PACKAGE_NAME}}.nuspec)" >> "$GITHUB_OUTPUT"
 
 
       - name: Use the output
