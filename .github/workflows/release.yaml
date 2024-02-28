@@ -30,6 +30,7 @@ jobs:
       - name: Read .nuspec file
         id: read-nuspec
         run: |
+            apt-get update
             sudo apt-get install libxml2-utils
             echo "nuspec=<<EOF_MARKER" 
             cat prod/${{env.PACKAGE_NAME}}.nuspec
