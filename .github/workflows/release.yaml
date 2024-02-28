@@ -33,7 +33,7 @@ jobs:
             echo "nuspec='<<EOF" 
             cat prod/${{env.PACKAGE_NAME}}.nuspec
             echo "'"
-            echo "EOF" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_ENV
 
       - name: Extract version from .nuspec
         id: extract-version
