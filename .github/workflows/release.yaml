@@ -32,7 +32,7 @@ jobs:
         run: |
             echo "nuspec=<<EOF" 
             cat prod/${{env.PACKAGE_NAME}}.nuspec
-            echo "EOF" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Extract version from .nuspec
         id: extract-version
