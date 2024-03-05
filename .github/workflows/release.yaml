@@ -58,5 +58,5 @@ jobs:
 
       - name: Use the output
         run: |
-          echo "The output value is ${{ ver01 }, ${{ ver02 }, ${{ ver03 }, ${{ ver04 }}"
+          echo "The output value is $ver01, $ver02, $ver03, $ver04"
       
