@@ -45,14 +45,18 @@ jobs:
 
       - name: Extract version from .nuspec
         id: extract-version
+        shell: pwsh
         run: |
-          cat prod/${{env.PACKAGE_NAME}}.nuspec
-          echo "11111=$(xmllint --xpath '/*[local-name()='version']/text()' prod/${{env.PACKAGE_NAME}}.nuspec)"
-          echo "22222=$(xmllint --xpath '/package/metadata/version' prod/${{env.PACKAGE_NAME}}.nuspec)"
-          echo "version=$(xmllint --xpath '/package/metadata/version/text()' prod/${{env.PACKAGE_NAME}}.nuspec)" >> "$GITHUB_OUTPUT"
+            [xml]$xml = Get-Content .\${{env:PACKAGE_NAME}}.nuspec
+            $node = $xml.SelectSingleNode("//*[local-name()='version']")
+            $ver=$node.InnerText.Split(".")
+            Write-Output "ver01=$($ver[0])" >> $Env:GITHUB_OUTPUT
+            Write-Output "ver02=$($ver[1])" >> $Env:GITHUB_OUTPUT
+            Write-Output "ver03=$($ver[2])" >> $Env:GITHUB_OUTPUT
+            Write-Output "ver04=$($ver[3])" >> $Env:GITHUB_OUTPUT
 
 
       - name: Use the output
         run: |
-          echo "The output value is ${{ steps.extract-version.version }}"
+          echo "The output value is ${{ ver01 }, ${{ ver02 }, ${{ ver03 }, ${{ ver04 }}"
       
