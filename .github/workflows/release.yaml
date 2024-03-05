@@ -58,5 +58,6 @@ jobs:
 
       - name: Use the output
         run: |
-          echo "The output value is $ver01, $ver02, $ver03, $ver04"
+          echo "The output value ver01  is ${{steps.extract-version.outputs.ver01}}"
+          echo  "Value: ${{join(steps.extract-version.outputs.*, ',')}}"
       
