@@ -47,13 +47,13 @@ jobs:
         id: extract-version
         shell: pwsh
         run: |
-            [xml]$xml = Get-Content prod\${{ env.PACKAGE_NAME }}.nuspec
+            [xml]$xml = Get-Content .\Milestone.TA.UPnP.nuspec
             $node = $xml.SelectSingleNode("//*[local-name()='version']")
             $ver=$node.InnerText.Split(".")
             Write-Output "ver01=$($ver[0])" >> $Env:GITHUB_OUTPUT
             Write-Output "ver02=$($ver[1])" >> $Env:GITHUB_OUTPUT
             Write-Output "ver03=$($ver[2])" >> $Env:GITHUB_OUTPUT
-            Write-Output "ver04=$($ver[3])" >> $Env:GITHUB_OUTPUT
+            Write-Output "ver04=$(if ($ver[3] -eq $null) {1} else {$ver[3]})" >> $Env:GITHUB_OUTPUT
 
 
       - name: Use the output
