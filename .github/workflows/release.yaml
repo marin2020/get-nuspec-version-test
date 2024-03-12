@@ -53,7 +53,7 @@ jobs:
              echo "PUSH on Main"
 
       - name: If it is PUSH on MAIN - show it ver 2
-        if: $GITHUB_EVENT_NAME == 'push' && $GITHUB_REF_NAME == 'main'
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: |
              echo "PUSH on Main"             
 
