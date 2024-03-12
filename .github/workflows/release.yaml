@@ -28,11 +28,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Install xmllint
-        run: |
-            sudo apt-get update
-            sudo apt-get install libxml2-utils
-      
       - name: Extract version from .nuspec
         id: extract-version
         shell: pwsh
@@ -59,5 +54,10 @@ jobs:
 
       - name: Show some github environment 
         run: |
-             echo "github.event_name: ${{ github.event_name }}"
+             echo "github.event_name: ${{ github.event_name }} "
+             echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+             echo "GITHUB_EVENT_NAME2: ${{ GITHUB_EVENT_NAME }}"
+             
              echo "github.ref_name: ${{ github.ref_name }} "
+             echo "GITHUB_REF_NAME: ${{ GITHUB_REF_NAME }} "
+             echo "GITHUB_REF_NAME2: $GITHUB_REF_NAME "
