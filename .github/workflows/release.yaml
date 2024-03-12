@@ -52,6 +52,11 @@ jobs:
         run: |
              echo "PUSH on Main"
 
+      - name: If it is PUSH on MAIN - show it ver 2
+        if: $GITHUB_EVENT_NAME == 'push' && $GITHUB_REF_NAME == 'main'
+        run: |
+             echo "PUSH on Main"             
+
       - name: Show some github environment 
         run: |
              echo "github.event_name: ${{ github.event_name }} "
