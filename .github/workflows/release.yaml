@@ -1,6 +1,7 @@
 name: Publish package
 
 on:
+    pull_request:
     push:
       branches:
         [ "main" ]
@@ -27,27 +28,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Install xmllint
-        run: |
-            sudo apt-get update
-            sudo apt-get install libxml2-utils
-      
-      #- name: Read .nuspec file
-      #  id: read-nuspec
-      #  run: |
-
-      #      echo "nuspec=<<EOF_MARKER" 
-      #      cat prod/${{env.PACKAGE_NAME}}.nuspec
-      #      echo EOF_MARKER
-      #      echo '$nuspec'
-      #      echo "$nuspec"
-      #      echo "nuspec='$nuspec'" >> $GITHUB_OUTPUT
-
       - name: Extract version from .nuspec
         id: extract-version
         shell: pwsh
         run: |
-            [xml]$xml = Get-Content .\Milestone.TA.UPnP.nuspec
+            [xml]$xml = Get-Content .\prod\Milestone.TA.UPnP.nuspec
             $node = $xml.SelectSingleNode("//*[local-name()='version']")
             $ver=$node.InnerText.Split(".")
             Write-Output "ver01=$($ver[0])" >> $Env:GITHUB_OUTPUT
@@ -60,4 +45,22 @@ jobs:
         run: |
           echo "The output value ver01  is ${{steps.extract-version.outputs.ver01}}"
           echo  "Value: ${{join(steps.extract-version.outputs.*, ',')}}"
-      
+
+
+      - name: If it is PUSH on MAIN - show it
+        if: github.event_name == 'push' && github.ref_name == 'main'
+        run: |
+             echo "PUSH on Main"
+
+      - name: If it is PUSH on MAIN - show it ver 2
+        if: $GITHUB_EVENT_NAME == 'push' && $GITHUB_REF_NAME == 'main'
+        run: |
+             echo "PUSH on Main"             
+
+      - name: Show some github environment 
+        run: |
+             echo "github.event_name: ${{ github.event_name }} "
+             echo "GITHUB_EVENT_NAME2: $GITHUB_EVENT_NAME"
+             
+             echo "github.ref_name: ${{ github.ref_name }} "
+             echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
